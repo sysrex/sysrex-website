@@ -11,7 +11,7 @@ theme = "papermod"
 build_search_index = true
 
 
-taxonomies = [{name = "tags", feed = true}]
+taxonomies = [{ name = "tags", feed = true }]
 
 [markdown]
 # Whether to do syntax highlighting
@@ -38,21 +38,20 @@ default_toc_open = false
 show_post_edit_button = false
 show_archive_year_count = true
 show_archive_month_count = true
-edit_post_url = "https://github.com/cydave/zola-theme-papermod/tree/master"
+edit_post_url = "https://github.com/sysrex/sysrex-website/tree/main"
 #copyright = ""
 date_format = "%Y-%m-%d"
 navigation = [
     { url = "$BASE_URL/archive", title = "Archive" },
     { url = "$BASE_URL/tags", title = "Tags" },
     { url = "$BASE_URL/search", title = "Search" },
-    { url = "https://getzola.org/", title = "Zola", is_external = true },
+    { url = "https://sysrex.com/", title = "sysrex", is_external = true },
 ]
 
 home_title = "PaperMod"
 home_content = "Welcome to a demo of the PaperMod theme!<br><b>PaperMod</b> is a simple but fast and responsive theme with a useful feature-set that enhances UX.<br>Do give a 🌟 on Github !<br>PaperMod is based on the hugo-PaperMod theme."
 social_icons = [
-    { url = "https://github.com/cydave", title = "GitHub", icon = "github" },
-    { url = "https://infosec.exchange/@cydave", title = "Mastodon", icon = "mastodon" },
-    { url = "https://twitter.com/_cydave", title = "Twitter", icon = "twitter" },
+    { url = "https://github.com/sysrex", title = "GitHub", icon = "github" },
+    { url = "https://twitter.com/sysrex", title = "Twitter", icon = "twitter" },
     { url = "$BASE_URL/atom.xml", title = "RSS", icon = "rss" },
 ]

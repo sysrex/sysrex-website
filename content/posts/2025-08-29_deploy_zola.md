@@ -29,7 +29,7 @@ To make this change, you need to update your github action file (see below), and
 Here is an adjusted workflow:
 
 ```yaml
-```
+
 on: push
 name: Build and deploy GH Pages
 jobs:
@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-      
+
       - name: Install zola
         run: sudo snap install --edge zola
 
@@ -78,7 +78,6 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-```
 
 
 This results in a much quicker deployment, and only requires one action to run. If you had used the old approach before, you can now delete the gh-pages branch as well.
