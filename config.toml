@@ -48,8 +48,8 @@ navigation = [
     { url = "https://sysrex.com/", title = "sysrex", is_external = true },
 ]
 
-home_title = "PaperMod"
-home_content = "Welcome to a demo of the PaperMod theme!<br><b>PaperMod</b> is a simple but fast and responsive theme with a useful feature-set that enhances UX.<br>Do give a 🌟 on Github !<br>PaperMod is based on the hugo-PaperMod theme."
+home_title = "My ramblings"
+home_content = "Welcome to my ramblings, this mostly about the things that I am learning and don't want to forget just yet! "
 social_icons = [
     { url = "https://github.com/sysrex", title = "GitHub", icon = "github" },
     { url = "https://twitter.com/sysrex", title = "Twitter", icon = "twitter" },
