@@ -3,7 +3,7 @@ title = "How to deploy zola on github pages"
 date = "2025-08-29"
 
 [taxonomies]
-tags = ["showcase"]
+tags = ["tutorial"]
 +++
 
 

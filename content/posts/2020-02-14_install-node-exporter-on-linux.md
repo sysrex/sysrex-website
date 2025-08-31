@@ -1,5 +1,8 @@
 +++
 title = "Install Node Exporter on Linux Servers"
+
+[taxonomies]
+tags = ["Linux"]
 +++
 
 ### Installing node Exporter on Linux - updated for newer versions
@@ -8,7 +11,7 @@ title = "Install Node Exporter on Linux Servers"
 
 Now lets run the copied URL with wget command
 
-`wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.1.1.linux-amd64.tar.gz`
+`wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz`
 
 Unzip the downloaded the file using below command
 
