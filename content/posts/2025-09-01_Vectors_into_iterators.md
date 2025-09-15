@@ -29,3 +29,11 @@ fn main() {
 	}
 } 
 ```
+
+
+An iterator can be converted back into a vector using the `collect()` method, we need to specify the type of the vector we want to convert it into.
+
+```rust
+let v: Vec<i32> = my_iter.collect(); // turns the iterator into a vector
+let v: HashSet<i32> = my_other_iter.collect(); // turns iter into a set
+```
