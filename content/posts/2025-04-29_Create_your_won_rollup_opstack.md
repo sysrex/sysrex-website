@@ -532,7 +532,7 @@ op-geth will show new blocks being imported
 op-node will show new L2 blocks being proposed and finalized
 You now have a working, local Sequencer node!
 
-### 9. Running Supporting Services (op-batcher and op-proposer)
+## 9. Running Supporting Services (op-batcher and op-proposer)
 Now that your Execution Client (op-geth) and Consensus Client (op-node) are live and producing L2 blocks,
 
 You still need two critical background services to complete the full rollup lifecycle:
@@ -541,7 +541,7 @@ You still need two critical background services to complete the full rollup life
 `Proposer (op-proposer)` → Posts state roots to L1 (for withdrawals and finality)
 
 
-#### 1. Start the Batcher (op-batcher)
+##### 1. Start the Batcher (op-batcher)
 The batcher collects blocks and transaction data from your L2 chain, bundles them into batches, and sends them to the Batch Inbox contract on Sepolia.
 
 Without the batcher, your rollup won’t post any data to Ethereum.
@@ -571,7 +571,7 @@ It will:
 Monitor your op-geth
 Submit batched L2 transactions to Sepolia (L1)
 
-#### 2. Start the Proposer (op-proposer)
+##### 2. Start the Proposer (op-proposer)
 The proposer submits L2 state roots to the L2OutputOracle contract on Sepolia.
 
 This enables users to withdraw funds back to L1 eventually.
@@ -606,7 +606,7 @@ It’s time to connect your wallet (like MetaMask) and interact with your L2 net
 
 This is where it starts feeling real — sending transactions, deploying contracts, and seeing activity on your very own chain!
 
-#### Step 1: Add Your Rollup as a Custom Network in MetaMask
+##### Step 1: Add Your Rollup as a Custom Network in MetaMask
 Open MetaMask and add a new custom network manually.
 
 Here’s the information you’ll need:
@@ -625,7 +625,7 @@ Save the network.
 
 Your MetaMask should now point to your local Rollup at localhost:8545.
 
-#### Step 2: Confirm You Are Connected
+##### Step 2: Confirm You Are Connected
 Once added:
 
 You should see your wallet connected to your L2 chain.
@@ -635,7 +635,7 @@ Don’t worry!
 
 We’ll fix that in the next section.
 
-### 11. Bridging ETH to Your Rollup
+## 11. Bridging ETH to Your Rollup
 Now that your wallet is connected to your L2 rollup, you’ll notice you have 0 ETH on your rollup network.
 
 To send transactions or deploy contracts, you need ETH on your L2 chain.
@@ -646,7 +646,7 @@ By bridging it through the L1 Standard Bridge contract you deployed earlier.
 
 Let’s do it step-by-step.
 
-#### Step 1: Find the L1 Bridge Contract Address
+##### Step 1: Find the L1 Bridge Contract Address
 Navigate to your contracts-bedrock package:
 
 ```bash
@@ -669,17 +669,18 @@ Important tips:
 
 Don’t send large amounts during testing.
 Wait for the Sepolia transaction to be confirmed.
+
 ##### Step 3: Wait for Bridging to Complete
 After sending ETH to the bridge:
 
-Your L1 deposit must be finalized by the rollup.
-The op-node will observe the L1 deposit.
-After a few blocks (usually 2–5 minutes), you’ll see the ETH minted on L2.
-You can check logs in your op-node and op-geth terminals — you should see "deposit finalized" or similar logs.
+- Your L1 deposit must be finalized by the rollup.
+- The op-node will observe the L1 deposit.
+- After a few blocks (usually 2–5 minutes), you’ll see the ETH minted on L2.
+- You can check logs in your op-node and op-geth terminals — you should see "deposit finalized" or similar logs.
 
 Once completed, your wallet on the Rollup network will show the bridged ETH.
 
-### 12. Testing Your Rollup
+## 12. Testing Your Rollup
 Now that you have bridged ETH onto your rollup, you’re finally ready to use your new blockchain just like any other EVM chain!
 
 You can now send transactions, deploy smart contracts, and observe your rollup in action.
