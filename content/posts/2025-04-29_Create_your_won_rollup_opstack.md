@@ -532,7 +532,7 @@ op-geth will show new blocks being imported
 op-node will show new L2 blocks being proposed and finalized
 You now have a working, local Sequencer node!
 
-#### 9. Running Supporting Services (op-batcher and op-proposer)
+### 9. Running Supporting Services (op-batcher and op-proposer)
 Now that your Execution Client (op-geth) and Consensus Client (op-node) are live and producing L2 blocks,
 
 You still need two critical background services to complete the full rollup lifecycle:
@@ -599,7 +599,7 @@ Watch your L2 chain
 Post finalized L2 outputs to L1
 
 
-10. Connecting Your Wallet to Your Rollup
+## 10. Connecting Your Wallet to Your Rollup
 Now that your rollup is fully running — producing blocks, posting batches, and finalizing states —
 
 It’s time to connect your wallet (like MetaMask) and interact with your L2 network directly.
@@ -660,7 +660,7 @@ This will output the address you need to send ETH to.
 
 Save this address.
 
-#### Step 2: Send Sepolia ETH to the Bridge Contract
+##### Step 2: Send Sepolia ETH to the Bridge Contract
 Open your MetaMask (or any wallet connected to Sepolia) and send a small amount of Sepolia ETH (like 0.05 or 0.1 ETH) to the L1StandardBridgeProxy address you just got.
 
 This will trigger a deposit into your rollup.
@@ -669,7 +669,7 @@ Important tips:
 
 Don’t send large amounts during testing.
 Wait for the Sepolia transaction to be confirmed.
-#### Step 3: Wait for Bridging to Complete
+##### Step 3: Wait for Bridging to Complete
 After sending ETH to the bridge:
 
 Your L1 deposit must be finalized by the rollup.
