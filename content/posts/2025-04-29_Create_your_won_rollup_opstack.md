@@ -11,18 +11,18 @@ tags = ["tutorial"]
 Within the rapidly expanding Ethereum ecosystem, Layer 2 rollups have emerged as the most effective approach to scaling—reducing transaction costs, increasing throughput, and enabling new possibilities for decentralized applications.
 
 However, for many developers, the process of deploying a rollup has long seemed daunting:
-	•	Excessive boilerplate code,
-	•	Numerous interdependent components, and
-	•	Limited transparency into the underlying mechanics.
+- Excessive boilerplate code,
+- Numerous interdependent components, and
+- Limited transparency into the underlying mechanics.
 
 The OP Stack addresses these challenges directly.
 
 As a modular, production-grade framework for building Ethereum-equivalent rollups, the OP Stack not only powers the Optimism mainnet but is also openly available for anyone to adapt and deploy.
 
 This guide is designed for developers who wish to:
-	•	Gain a deeper understanding of how rollups such as Optimism operate,
-	•	Experiment by deploying their own Layer 2 chain, or
-	•	Explore Ethereum’s infrastructure at a more technical level.
+- Gain a deeper understanding of how rollups such as Optimism operate,
+- Experiment by deploying their own Layer 2 chain, or
+- Explore Ethereum’s infrastructure at a more technical level.
 
 ## 2. Quick Overview: OP Stack Components
 Before we get hands-on, let’s take a moment to understand the core building blocks of an OP Stack rollup.
@@ -31,58 +31,45 @@ Just like Ethereum has a consensus client (e.g. Lighthouse, Prysm) and an execut
 
 Here’s a quick overview:
 
-### 1. Execution Client → op-geth
+#### 1. Execution Client → op-geth
 The execution client is responsible for:
 
-Executing smart contracts
-Maintaining the state of the chain
-Handling the Ethereum JSON-RPC interface
-In the OP Stack, the execution client is a fork of Geth called op-geth.
+- Executing smart contracts
+- Maintaining the state of the chain
+- Handling the Ethereum JSON-RPC interface
+- In the OP Stack, the execution client is a fork of Geth called op-geth.
 
 Think of this as the “EVM Brain” of your L2 chain.
 
-### 2. Consensus Client → op-node
+#### 2. Consensus Client → op-node
 The consensus client is responsible for:
 
-Tracking L1 block (on Ethereum Sepolia in our case)
-Coordinating with the execution client using the Engine API
-Determining the canonical L2 chain based on inputs from L1
-This is handled by op-node — the core driver of your rollup.
+- Tracking L1 block (on Ethereum Sepolia in our case)
+- Coordinating with the execution client using the Engine API
+- Determining the canonical L2 chain based on inputs from L1
+- This is handled by op-node — the core driver of your rollup.
 
 It watches Ethereum L1, processes L2 inputs, and drives op-geth to produce L2 blocks.
 
-### 3. Batcher → op-batcher
+#### 3. Batcher → op-batcher
 Once your rollup is producing blocks, you need to post those blocks to Ethereum L1.
-
-That’s the job of the batcher.
 
 The batcher:
 
-Collects L2 transaction data from op-geth
-Publishes it to L1 in a special contract
-Ensures data availability and verifiability
-This is what makes rollups secure: the data lives on Ethereum.
+- Collects L2 transaction data from op-geth
+- Publishes it to L1 in a special contract
+- Ensures data availability and verifiability
+- This is what makes rollups secure: the data lives on Ethereum.
 
-### 4. Proposer → op-proposer
-The final component is the proposer.
+#### 4. Proposer → op-proposer
+The proposer is responsible for:
 
-It’s responsible for:
+- Submitting state roots of your L1 chain to L1
+- Updating the Output Oracle smart contract
+- Enabling withdrawals from L2 back to L1
+- Without the proposer, your chain can’t finalize.
 
-Submitting state roots of your L1 chain to L1
-Updating the Output Oracle smart contract
-Enabling withdrawals from L2 back to L1
-Without the proposer, your chain can’t finalize.
 
-For testing, it’s optional — but for a live chain, it’s essential.
-
-### How They All Work Together
-Here’s the simplified workflow:
-
-op-node watches Sepolia for new L1 blocks
-It instructs op-geth to produce L2 blocks
-op-batcher collects those blocks and posts them to L1
-op-proposer posts the final state to L1 for withdrawals
-All these components work together to keep your L2 chain running — decentralized, scalable and trust-minimised.
 
 ## 3. Setting Up the Environment
 Now that you understand the major components, it’s time to roll up our sleeves and set up everything you’ll need to spin up your own L2 chain.
@@ -133,7 +120,7 @@ cd op-geth
 
 And build the geth binary:
 ```bash
-make geth
+just geth
 ```
 
 This will produce a build/bin/geth binary, which you’ll use to run your L2 Execution Client.
@@ -307,21 +294,18 @@ Here’s a simplified example:
 ```
 
 ## 6. Deploying L1 Contracts Using `op-deployer`
-Now that your rollup configuration is ready, it’s time to deploy the essential OP Stack contracts onto the Sepolia testnet.
-
 This is a crucial step — these contracts form the backbone of your rollup system, including bridges, oracles, and system configuration.
 
 We’ll use the op-deployer tool to handle this process.
 
-What is `op-deployer`?
-op-deployer is a command-line tool built by the Optimism team to make deploying OP Stack contracts simple and repeatable.
+`op-deployer` is a command-line tool built by the Optimism team to make deploying OP Stack contracts simple and repeatable.
 
 It handles:
 
-Contract deployments
-Genesis and rollup config generation
-Chain initialization steps
-Using op-deployer also ensures your deployment follows OP Stack standards, making it future-proof if you want to join the Superchain later.
+- Contract deployments
+- Genesis and rollup config generation
+- Chain initialization steps
+- Using op-deployer also ensures your deployment follows OP Stack standards, making it future-proof if you want to join the Superchain later.
 
 #### Step 1: Install `op-deployer`
 
@@ -347,11 +331,15 @@ From the optimism root directory, run:
 ```
 
 `11155111` → Sepolia L1 chain ID
+
 `420` → L2 chain ID for our rollup
+
 `.deployer` → Directory where deployment config and state files will be stored
+
 This command creates:
 
 `.deployer/intent.toml` (your deployment config)
+
 `.deployer/state.json` (populated after deploy)
 
 #### Step 3: Customize Your Intent File
@@ -370,16 +358,18 @@ Now deploy the contracts to Sepolia:
 ```
 
 `$L1_RPC_URL` → your Sepolia RPC URL (Alchemy, Infura, etc.)
+
 `$GS_ADMIN_PRIVATE_KEY` → Admin wallet’s private key you generated earlier
 
-What Happens During This Step?
-Contracts like the L1StandardBridge, SystemConfig, OutputOracle etc. are deployed on Sepolia
-Deployer records all deployed contract addresses into `.deployer/state.json`
-The deployment flow follows the config you created earlier
-If everything works, you’ll see success messages with deployed addresses.
+
+- Contracts like the L1StandardBridge, SystemConfig, OutputOracle etc. are deployed on Sepolia
+- Deployer records all deployed contract addresses into `.deployer/state.json`
+- The deployment flow follows the config you created earlier
+- If everything works, you’ll see success messages with deployed addresses.
+
+
 
 If something fails (like “out of gas” errors), check:
-
 Fund balances on Admin account
 Correct environment variables loaded
 
@@ -387,13 +377,16 @@ Correct environment variables loaded
 After a successful deployment, you will have:
 
 `.deployer/state.json` — contract addresses, deployment data
+
 `.deployer/` directory — full deployment snapshot
+
 We will use this data in the next steps to generate genesis and initialize the L2 nodes.
 
-#### 7. Generating the Genesis and Rollup Config Files
+## 7. Generating the Genesis and Rollup Config Files
 Now that your smart contracts are deployed on Sepolia, it’s time to generate the core configuration files your chain will need to actually run:
 
 `genesis.json` → for the Execution Client (op-geth)
+
 `rollup.json` → for the Consensus Client (op-node)
 
 
@@ -416,7 +409,7 @@ In our case:
 ```
 This command reads from .deployer/state.json and produces .deployer/genesis.json.
 
-### Step 2: Generate rollup.json
+#### Step 2: Generate rollup.json
 The rollup.json file defines the rollup configuration for your Consensus Client.
 
 It tells `op-node`:
@@ -441,7 +434,7 @@ You now should have:
 
 We’ll copy these files to the right places when initializing op-geth and op-node in the next steps.
 
-#### 8. Running the Core Clients
+## 8. Running the Core Clients
 With your contracts deployed and configuration files generated, it’s time to start the two main engines of your rollup:
 
 Execution Client (op-geth)
@@ -613,7 +606,7 @@ It’s time to connect your wallet (like MetaMask) and interact with your L2 net
 
 This is where it starts feeling real — sending transactions, deploying contracts, and seeing activity on your very own chain!
 
-Step 1: Add Your Rollup as a Custom Network in MetaMask
+#### Step 1: Add Your Rollup as a Custom Network in MetaMask
 Open MetaMask and add a new custom network manually.
 
 Here’s the information you’ll need:
@@ -632,7 +625,7 @@ Save the network.
 
 Your MetaMask should now point to your local Rollup at localhost:8545.
 
-Step 2: Confirm You Are Connected
+#### Step 2: Confirm You Are Connected
 Once added:
 
 You should see your wallet connected to your L2 chain.
@@ -642,7 +635,7 @@ Don’t worry!
 
 We’ll fix that in the next section.
 
-11. Bridging ETH to Your Rollup
+### 11. Bridging ETH to Your Rollup
 Now that your wallet is connected to your L2 rollup, you’ll notice you have 0 ETH on your rollup network.
 
 To send transactions or deploy contracts, you need ETH on your L2 chain.
@@ -653,7 +646,7 @@ By bridging it through the L1 Standard Bridge contract you deployed earlier.
 
 Let’s do it step-by-step.
 
-Step 1: Find the L1 Bridge Contract Address
+#### Step 1: Find the L1 Bridge Contract Address
 Navigate to your contracts-bedrock package:
 
 ```bash
@@ -667,7 +660,7 @@ This will output the address you need to send ETH to.
 
 Save this address.
 
-Step 2: Send Sepolia ETH to the Bridge Contract
+#### Step 2: Send Sepolia ETH to the Bridge Contract
 Open your MetaMask (or any wallet connected to Sepolia) and send a small amount of Sepolia ETH (like 0.05 or 0.1 ETH) to the L1StandardBridgeProxy address you just got.
 
 This will trigger a deposit into your rollup.
@@ -676,7 +669,7 @@ Important tips:
 
 Don’t send large amounts during testing.
 Wait for the Sepolia transaction to be confirmed.
-Step 3: Wait for Bridging to Complete
+#### Step 3: Wait for Bridging to Complete
 After sending ETH to the bridge:
 
 Your L1 deposit must be finalized by the rollup.
@@ -686,7 +679,7 @@ You can check logs in your op-node and op-geth terminals — you should see "dep
 
 Once completed, your wallet on the Rollup network will show the bridged ETH.
 
-12. Testing Your Rollup
+### 12. Testing Your Rollup
 Now that you have bridged ETH onto your rollup, you’re finally ready to use your new blockchain just like any other EVM chain!
 
 You can now send transactions, deploy smart contracts, and observe your rollup in action.
