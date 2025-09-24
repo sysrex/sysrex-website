@@ -31,7 +31,7 @@ Just like Ethereum has a consensus client (e.g. Lighthouse, Prysm) and an execut
 
 Here’s a quick overview:
 
-#### 1. Execution Client → op-geth
+#### Execution Client → op-geth
 The execution client is responsible for:
 
 - Executing smart contracts
@@ -41,7 +41,7 @@ The execution client is responsible for:
 
 Think of this as the “EVM Brain” of your L2 chain.
 
-#### 2. Consensus Client → op-node
+#### Consensus Client → op-node
 The consensus client is responsible for:
 
 - Tracking L1 block (on Ethereum Sepolia in our case)
@@ -51,7 +51,7 @@ The consensus client is responsible for:
 
 It watches Ethereum L1, processes L2 inputs, and drives op-geth to produce L2 blocks.
 
-#### 3. Batcher → op-batcher
+#### Batcher → op-batcher
 Once your rollup is producing blocks, you need to post those blocks to Ethereum L1.
 
 The batcher:
@@ -61,7 +61,7 @@ The batcher:
 - Ensures data availability and verifiability
 - This is what makes rollups secure: the data lives on Ethereum.
 
-#### 4. Proposer → op-proposer
+#### Proposer → op-proposer
 The proposer is responsible for:
 
 - Submitting state roots of your L1 chain to L1
@@ -71,7 +71,7 @@ The proposer is responsible for:
 
 
 
-## 3. Setting Up the Environment
+## Setting Up the Environment
 Now that you understand the major components, it’s time to roll up our sleeves and set up everything you’ll need to spin up your own L2 chain.
 
 We’ll begin by cloning the relevant repositories, installing dependencies, and preparing the core binaries.
@@ -307,7 +307,7 @@ It handles:
 - Chain initialization steps
 - Using op-deployer also ensures your deployment follows OP Stack standards, making it future-proof if you want to join the Superchain later.
 
-#### Step 1: Install `op-deployer`
+#### Install `op-deployer`
 
 Make sure you use a release version.
 
@@ -321,7 +321,7 @@ just build
 ```
 Ensure that `bin/op-deployer` exists.
 
-#### Step 2: Initialize a `.deployer` Directory
+#### Initialize a `.deployer` Directory
 Now, we’ll create a working directory where op-deployer will manage deployment state.
 
 From the optimism root directory, run:
@@ -342,7 +342,7 @@ This command creates:
 
 `.deployer/state.json` (populated after deploy)
 
-#### Step 3: Customize Your Intent File
+#### Customize Your Intent File
 You can open `.deployer/intent.json` to tweak settings like:
 
 - Owner addresses
@@ -350,7 +350,7 @@ You can open `.deployer/intent.json` to tweak settings like:
 - Governance settings
 For now, default settings are fine for a testnet rollup.
 
-#### Step 4: Deploy Contracts to L1
+#### Deploy Contracts to L1
 Now deploy the contracts to Sepolia:
 
 ```bash
@@ -373,7 +373,7 @@ If something fails (like “out of gas” errors), check:
 Fund balances on Admin account
 Correct environment variables loaded
 
-#### Step 5: Result — Deployed State
+#### Result — Deployed State
 After a successful deployment, you will have:
 
 `.deployer/state.json` — contract addresses, deployment data
@@ -390,7 +390,7 @@ Now that your smart contracts are deployed on Sepolia, it’s time to generate t
 `rollup.json` → for the Consensus Client (op-node)
 
 
-#### Step 1: Generate genesis.json
+#### Generate genesis.json
 The `genesis.json` file defines the initial state for your Execution Client.
 
 It tells op-geth:
@@ -409,7 +409,7 @@ In our case:
 ```
 This command reads from .deployer/state.json and produces .deployer/genesis.json.
 
-#### Step 2: Generate rollup.json
+#### Generate rollup.json
 The rollup.json file defines the rollup configuration for your Consensus Client.
 
 It tells `op-node`:
@@ -443,7 +443,7 @@ These two clients will work together to drive your L2 rollup.
 
 Let’s go step-by-step.
 
-#### Step 1: Initialize op-geth
+#### Initialize op-geth
 First, we need to initialize the Execution Client (op-geth) using the genesis.json we created.
 
 Navigate to your op-geth directory:
@@ -462,7 +462,7 @@ This tells op-geth:
 
 Use the starting block specified in genesis.json
 Store blockchain data in the datadir/ folder
-#### Step 2: Start op-geth
+#### Start op-geth
 Now, start the Execution Client:
 
 ```bash
@@ -606,7 +606,7 @@ It’s time to connect your wallet (like MetaMask) and interact with your L2 net
 
 This is where it starts feeling real — sending transactions, deploying contracts, and seeing activity on your very own chain!
 
-##### Step 1: Add Your Rollup as a Custom Network in MetaMask
+##### Add Your Rollup as a Custom Network in MetaMask
 Open MetaMask and add a new custom network manually.
 
 Here’s the information you’ll need:
@@ -625,7 +625,7 @@ Save the network.
 
 Your MetaMask should now point to your local Rollup at localhost:8545.
 
-##### Step 2: Confirm You Are Connected
+##### Confirm You Are Connected
 Once added:
 
 You should see your wallet connected to your L2 chain.
@@ -660,7 +660,7 @@ This will output the address you need to send ETH to.
 
 Save this address.
 
-##### Step 2: Send Sepolia ETH to the Bridge Contract
+##### Send Sepolia ETH to the Bridge Contract
 Open your MetaMask (or any wallet connected to Sepolia) and send a small amount of Sepolia ETH (like 0.05 or 0.1 ETH) to the L1StandardBridgeProxy address you just got.
 
 This will trigger a deposit into your rollup.
@@ -670,7 +670,7 @@ Important tips:
 Don’t send large amounts during testing.
 Wait for the Sepolia transaction to be confirmed.
 
-##### Step 3: Wait for Bridging to Complete
+##### Wait for Bridging to Complete
 After sending ETH to the bridge:
 
 - Your L1 deposit must be finalized by the rollup.
@@ -687,7 +687,7 @@ You can now send transactions, deploy smart contracts, and observe your rollup i
 
 Let’s walk through the basic tests you should do.
 
-#### Step 1: Send a Test Transaction
+#### Send a Test Transaction
 Use your MetaMask (or any wallet connected to your L2 network) and:
 
 Send a small amount of ETH to another address (or even back to yourself).
@@ -701,7 +701,7 @@ If this works, it means:
 Your RPC endpoint (localhost:8545) is live
 Your execution and consensus clients are processing new transactions
 Your rollup is healthy
-##### Step 2: Deploy a Smart Contract
+#### Deploy a Smart Contract
 For a full test, let’s also deploy a simple smart contract!
 
 You can use tools like Remix IDE, Hardhat, or Foundry.
