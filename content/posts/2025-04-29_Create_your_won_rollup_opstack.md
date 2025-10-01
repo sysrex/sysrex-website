@@ -120,7 +120,7 @@ cd op-geth
 
 And build the geth binary:
 ```bash
-just geth
+make geth
 ```
 
 This will produce a build/bin/geth binary, which you’ll use to run your L2 Execution Client.
