@@ -466,27 +466,27 @@ Store blockchain data in the datadir/ folder
 Now, start the Execution Client:
 
 ```bash
-./build/bin/geth \\
-  --datadir ./datadir \\
-  --http \\
-  --http.corsdomain="*" \\
-  --http.vhosts="*" \\
-  --http.addr=0.0.0.0 \\
-  --http.api=web3,debug,eth,txpool,net,engine \\
-  --ws \\
-  --ws.addr=0.0.0.0 \\
-  --ws.port=8546 \\
-  --ws.origins="*" \\
-  --ws.api=debug,eth,txpool,net,engine \\
-  --syncmode=full \\
-  --gcmode=archive \\
-  --nodiscover \\
-  --maxpeers=0 \\
-  --networkid=42069 \\
-  --authrpc.vhosts="*" \\
-  --authrpc.addr=0.0.0.0 \\
-  --authrpc.port=8551 \\
-  --authrpc.jwtsecret=./jwt.txt \\
+./build/bin/geth \
+  --datadir ./datadir \
+  --http \
+  --http.corsdomain="*" \
+  --http.vhosts="*" \
+  --http.addr=0.0.0.0 \
+  --http.api=web3,debug,eth,txpool,net,engine \
+  --ws \
+  --ws.addr=0.0.0.0 \
+  --ws.port=8546 \
+  --ws.origins="*" \
+  --ws.api=debug,eth,txpool,net,engine \
+  --syncmode=full \
+  --gcmode=archive \
+  --nodiscover \
+  --maxpeers=0 \
+  --networkid=42069 \
+  --authrpc.vhosts="*" \
+  --authrpc.addr=0.0.0.0 \
+  --authrpc.port=8551 \
+  --authrpc.jwtsecret=./jwt.txt \
   --rollup.disabletxpoolgossip=true
 ```
 
@@ -500,21 +500,20 @@ Step 3: Start op-node
 
 ```bash
 cd ~/optimism/op-node
-./bin/op-node \\
-  --l2=http://localhost:8551 \\
-  --l2.jwt-secret=./jwt.txt \\
-  --sequencer.enabled \\
-  --sequencer.l1-confs=5 \\
-  --verifier.l1-confs=4 \\
-  --rollup.config=../.deployer/rollup.json \\
-  --rpc.addr=0.0.0.0 \\
-  --rpc.port=9545 \\
-  --p2p.disable \\
-  --rpc.enable-admin \\
-  --p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \\
-  --l1=$L1_RPC_URL \\
+./bin/op-node \
+  --l2=http://localhost:8551 \
+  --l2.jwt-secret=./jwt.txt \
+  --sequencer.enabled \
+  --sequencer.l1-confs=5 \
+  --verifier.l1-confs=4 \
+  --rollup.config=../.deployer/rollup.json \
+  --rpc.addr=0.0.0.0 \
+  --rpc.port=9545 \
+  --p2p.disable \
+  --rpc.enable-admin \
+  --p2p.sequencer.key=$GS_SEQUENCER_PRIVATE_KEY \
+  --l1=$L1_RPC_URL \
   --l1.rpckind=$L1_RPC_KIND
-  --altda.enabled=true
 ```
 
 
@@ -548,19 +547,19 @@ Without the batcher, your rollup won’t post any data to Ethereum.
 
 ```bash
 cd ~/optimism/op-batcher
-./bin/op-batcher \\
-  --l2-eth-rpc=http://localhost:8545 \\
-  --rollup-rpc=http://localhost:9545 \\
-  --poll-interval=1s \\
-  --sub-safety-margin=6 \\
-  --num-confirmations=1 \\
-  --safe-abort-nonce-too-low-count=3 \\
-  --resubmission-timeout=30s \\
-  --rpc.addr=0.0.0.0 \\
-  --rpc.port=8548 \\
-  --rpc.enable-admin \\
-  --max-channel-duration=25 \\
-  --l1-eth-rpc=$L1_RPC_URL \\
+./bin/op-batcher \
+  --l2-eth-rpc=http://localhost:8545 \
+  --rollup-rpc=http://localhost:9545 \
+  --poll-interval=1s \
+  --sub-safety-margin=6 \
+  --num-confirmations=1 \
+  --safe-abort-nonce-too-low-count=3 \
+  --resubmission-timeout=30s \
+  --rpc.addr=0.0.0.0 \
+  --rpc.port=8548 \
+  --rpc.enable-admin \
+  --max-channel-duration=25 \
+  --l1-eth-rpc=$L1_RPC_URL \
   --private-key=$GS_BATCHER_PRIVATE_KEY
 ```
 
@@ -582,12 +581,12 @@ Navigate to the proposer directory:
 
 ```bash
 cd ~/optimism/op-proposer
-./bin/op-proposer \\
-  --poll-interval=12s \\
-  --rpc.port=8560 \\
-  --rollup-rpc=http://localhost:9545 \\
-  --l2oo-address=$(cat ../packages/contracts-bedrock/deployments/getting-started/.deploy | jq -r .L2OutputOracleProxy) \\
-  --private-key=$GS_PROPOSER_PRIVATE_KEY \\
+./bin/op-proposer \
+  --poll-interval=12s \
+  --rpc.port=8560 \
+  --rollup-rpc=http://localhost:9545 \
+  --l2oo-address=$(cat ../packages/contracts-bedrock/deployments/getting-started/.deploy | jq -r .L2OutputOracleProxy) \
+  --private-key=$GS_PROPOSER_PRIVATE_KEY \
   --l1-eth-rpc=$L1_RPC_URL
 ```
 
@@ -701,6 +700,8 @@ If this works, it means:
 Your RPC endpoint (localhost:8545) is live
 Your execution and consensus clients are processing new transactions
 Your rollup is healthy
+
+
 #### Deploy a Smart Contract
 For a full test, let’s also deploy a simple smart contract!
 
