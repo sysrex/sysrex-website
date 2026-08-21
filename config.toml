@@ -54,3 +54,4 @@ social_icons = [
     { url = "https://twitter.com/sysrex", title = "Twitter", icon = "twitter" },
     { url = "$BASE_URL/atom.xml", title = "RSS", icon = "rss" },
 ]
+
