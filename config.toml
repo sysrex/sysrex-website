@@ -1,55 +1,61 @@
 # The URL the site will be built for
 base_url = "https://sysrex.com"
 
+title = "sysrex"
+description = "This is mostly about the things that I am learning and don't want to forget just yet!"
+
+default_language = "en"
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
 
-# Add papermode theme
-theme = "papermod"
+theme = "nivis"
+
+generate_feeds = true
+feed_filenames = ["atom.xml"]
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
 
+taxonomies = [{ name = "tags", feed = true, paginate_by = 5 }]
 
-taxonomies = [{ name = "tags", feed = true }]
+[search]
+index_format = "fuse_json"
+include_title = true
+include_description = true
+include_content = true
+
+[markdown]
+render_emoji = true
+github_alerts = true
+bottom_footnotes = true
 
 [markdown.highlighting]
-light_theme = "github-light"
-dark_theme = "github-dark"
+style = "class"
+light_theme = "one-light"
+dark_theme = "one-dark-pro"
 
 [extra]
-# Put all your custom variables here
+avatar = ""
 
-[extra.papermod]
-title = "sysrex"
-default_theme = "auto"
-theme = "light"
-language_direction = "auto"
-keywords = ["keyword1", "keyword2", "keyword3"]
-show_theme_toggle = true
-show_scroll_to_top = true
-show_code_copy_buttons = true
-show_reading_time = true
-show_word_count = false
-show_post_nav_links = true
-show_post_meta = true
-default_toc_open = false
-show_post_edit_button = false
-show_archive_year_count = true
-show_archive_month_count = true
-edit_post_url = "https://github.com/sysrex/sysrex-website/tree/main"
-#copyright = ""
-date_format = "%Y-%m-%d"
-navigation = [
-    { url = "$BASE_URL/archive", title = "Archive" },
-    { url = "$BASE_URL/tags", title = "Tags" },
-    { url = "https://sysrex.com/", title = "sysrex", is_external = true },
+home_layout = "focus"
+taxonomy_mode = "tags"
+content_lang = ""
+motto_mode = "hide"
+
+social_links = [
+    { name = "github", url = "https://github.com/sysrex" },
+    { name = "twitter", url = "https://twitter.com/sysrex" },
+    { name = "rss", url = "https://sysrex.com/atom.xml" },
 ]
 
-home_title = "My ramblings"
-home_content = "This is mostly about the things that I am learning and don't want to forget just yet!"
-social_icons = [
-    { url = "https://github.com/sysrex", title = "GitHub", icon = "github" },
-    { url = "https://twitter.com/sysrex", title = "Twitter", icon = "twitter" },
-    { url = "$BASE_URL/atom.xml", title = "RSS", icon = "rss" },
-]
+[extra.footer]
+copyright_holder = ""
+copyright_since = 0
+
+[extra.sections]
+posts = true
+about = false
+archive = true
+tags = true
+links = false

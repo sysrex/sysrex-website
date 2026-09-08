@@ -1,3 +1,4 @@
-[submodule "themes/papermod"]
-	path = themes/papermod
-	url = https://github.com/cydave/zola-theme-papermod
+[submodule "themes/nivis"]
+	path = themes/nivis
+	url = https://github.com/Resorie/zola-theme-nivis.git
+	branch = master
