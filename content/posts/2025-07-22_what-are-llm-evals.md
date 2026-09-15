@@ -2,7 +2,7 @@
 title = "What LLM Evals Actually Are (and Why 'Looks Good to Me' Isn't a Strategy)"
 
 [taxonomies]
-tags = ["AI", "Machine Learning"]
+tags = ["AI", "Machine Learning", "learning-notes"]
 +++
 
 A lot of teams building on top of LLMs ship a prompt, look at a handful of

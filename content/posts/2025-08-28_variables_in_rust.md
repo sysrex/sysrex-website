@@ -2,7 +2,7 @@
 title = "Variables in Rust"
 
 [taxonomies]
-tags = ["Rust"]
+tags = ["Rust", "learning-notes"]
 +++
 
 

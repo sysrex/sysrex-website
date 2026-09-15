@@ -2,7 +2,7 @@
 base_url = "https://sysrex.com"
 
 title = "sysrex"
-description = "This is mostly about the things that I am learning and don't want to forget just yet!"
+description = "Platform / SRE notes: Kubernetes, CI/CD, observability, and blockchain infra. Written from the EU (CET)."
 
 default_language = "en"
 
@@ -41,7 +41,8 @@ avatar = ""
 home_layout = "focus"
 taxonomy_mode = "tags"
 content_lang = ""
-motto_mode = "hide"
+motto_mode = "single"
+motto = "Platform / SRE notes: Kubernetes, CI/CD, observability, and blockchain infra. Written from the EU (CET)."
 
 social_links = [
     { name = "github", url = "https://github.com/sysrex" },
@@ -55,7 +56,7 @@ copyright_since = 0
 
 [extra.sections]
 posts = true
-about = false
+about = true
 archive = true
 tags = true
 links = false
