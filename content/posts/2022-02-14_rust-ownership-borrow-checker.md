@@ -2,7 +2,7 @@
 title = "Rust Ownership Made Me Feel Like a Junior Dev Again"
 
 [taxonomies]
-tags = ["Rust", "Go"]
+tags = ["Rust", "Go", "learning-notes"]
 +++
 
 I've been writing Go for years. I know what a pointer is, I know what a data race is, and I've made my peace with `go test -race` catching the ones I missed. So when I sat down to write my first real Rust program, I expected the syntax to be annoying and the rest to be familiar. Ten minutes in, the compiler told me I couldn't use a variable I had clearly just created, and I genuinely didn't understand why.

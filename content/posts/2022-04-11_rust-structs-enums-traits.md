@@ -2,7 +2,7 @@
 title = "Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over"
 
 [taxonomies]
-tags = ["Rust", "Go"]
+tags = ["Rust", "Go", "learning-notes"]
 +++
 
 Go doesn't have enums. It has `iota` and a gentleman's agreement that you won't pass it a number that doesn't mean anything. I'd made my peace with that years ago — it's just how Go is. Then I wrote my first Rust `enum` with actual data attached to its variants, and realized I'd been quietly working around a hole in the type system for my entire Go career without noticing it was a hole.
