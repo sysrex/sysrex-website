@@ -2,7 +2,7 @@
 title = "Rust Vectors into Iterators"
 
 [taxonomies]
-tags = ["Rust"]
+tags = ["Rust", "learning-notes"]
 +++
 
 Converting a Rust Vector into an Iterator

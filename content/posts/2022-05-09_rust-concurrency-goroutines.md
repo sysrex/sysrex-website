@@ -2,7 +2,7 @@
 title = "Goroutines Spoiled Me, and Rust Un-Spoiled Me"
 
 [taxonomies]
-tags = ["Rust", "Go"]
+tags = ["Rust", "Go", "learning-notes"]
 +++
 
 Concurrency is the actual reason I picked up Rust. Go already sold me on the idea that concurrency should be a first-class, unscary part of a language — `go func()` and a channel, done. So when people said Rust was "fearless concurrency," I expected either a nicer version of what I already had, or marketing. It turned out to be neither. It's the same promise Go makes, kept in a completely different way, and it cost me more up front than I expected.

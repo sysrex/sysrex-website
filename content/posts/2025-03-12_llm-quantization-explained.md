@@ -2,7 +2,7 @@
 title = "LLM Quantization, Explained in Plain English"
 
 [taxonomies]
-tags = ["AI", "Machine Learning"]
+tags = ["AI", "Machine Learning", "learning-notes"]
 +++
 
 If you've tried running a large language model on your own hardware, you've

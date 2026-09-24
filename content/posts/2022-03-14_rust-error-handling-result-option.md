@@ -2,7 +2,7 @@
 title = "`if err != nil` vs `Result<T, E>`: A Love Letter and a Breakup"
 
 [taxonomies]
-tags = ["Rust", "Go"]
+tags = ["Rust", "Go", "learning-notes"]
 +++
 
 If there's one place I expected Rust to feel familiar, it was error handling. Go and Rust are the two mainstream languages that both looked at exceptions and said no thanks — errors are values, you check them, you move on. I've typed `if err != nil` enough times that my fingers do it without me. So naturally, my first instinct in Rust was to write the exact same pattern by hand, everywhere, for weeks, before I found out there was a much better way.
