@@ -12,6 +12,6 @@ pinned_posts = [
     "posts/2025-04-29_Create_your_won_rollup_opstack.md",
     "posts/2024-11-05_postgresql-vacuum-explained.md",
     "posts/2025-06-18_red-method-monitoring.md",
-    "posts/2025-09-10_toy-mempool-rust-lessons.md",
+    "posts/2025-09-19_smoke-test-that-lied.md",
 ]
 +++
