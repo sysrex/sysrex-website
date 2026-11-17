@@ -1,5 +1,6 @@
 +++
 title = "Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over"
+description = "Rust enums that carry data, exhaustive match, and traits you opt into, set against Go's iota and structural interfaces."
 
 [taxonomies]
 tags = ["Rust", "Go"]
@@ -109,7 +110,7 @@ impl Describe for Point {
 }
 ```
 
-No `impl` block, no trait, even if the method already exists on the type with the exact right signature. My first reaction was that this was pure ceremony. My second reaction, after accidentally satisfying a Go interface I never meant to implement (the classic "oh no, this type now silently matches `io.Writer`" surprise), was that maybe requiring the declaration up front isn't ceremony, it's the same guardrail as exhaustive `match` — the compiler making sure nothing happens by accident.
+Without an `impl` block, the type does not implement the trait, even if a method with the right signature already exists. My first reaction was that this was pure ceremony. My second reaction, after accidentally satisfying a Go interface I never meant to implement (the classic "oh no, this type now silently matches `io.Writer`" surprise), was that maybe requiring the declaration up front isn't ceremony, it's the same guardrail as exhaustive `match` — the compiler making sure nothing happens by accident.
 
 Traits also do a couple of things Go interfaces can't: default method bodies (implement once, override only where you need to), and associated types that tie a second type to the implementation. Go would need embedding tricks and generics gymnastics to fake either of those.
 
@@ -119,4 +120,4 @@ Traits also do a couple of things Go interfaces can't: default method bodies (im
 - **Generics vs `dyn Trait`.** Go has one way to be polymorphic — an interface value. Rust makes you choose up front between compile-time generics (`fn process<T: Describe>(item: T)`) and runtime trait objects (`fn process(item: &dyn Describe)`), and as a newcomer I didn't yet have the instinct for which one a given situation wanted.
 - **Trait bound errors are a paragraph long.** When a generic function's constraints don't line up, the error message is honest and complete and about fifteen lines of `where` clauses I have to read twice.
 
-Next up: concurrency, which is the actual reason I picked up Rust in the first place — and where goroutines both prepared me and completely failed to prepare me.
+Next up: [concurrency](/posts/rust-concurrency-goroutines/), which is the actual reason I picked up Rust in the first place — and where goroutines both prepared me and completely failed to prepare me.

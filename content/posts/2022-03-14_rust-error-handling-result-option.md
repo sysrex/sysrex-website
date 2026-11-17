@@ -1,5 +1,6 @@
 +++
 title = "`if err != nil` vs `Result<T, E>`: A Love Letter and a Breakup"
+description = "Result, Option, and the ? operator, compared with if err != nil, and the places unwrap still trips me up."
 
 [taxonomies]
 tags = ["Rust", "Go"]
@@ -97,4 +98,4 @@ And then there's picking a story for custom errors. Go has basically one idiom: 
 - **The `anyhow` vs `thiserror` decision.** Go gives you one way to do this. Rust gives you two good ones and expects you to know why.
 - **`?` is magic until it isn't.** The automatic `From` conversion is great right up until you have three error types in scope and the compiler can't figure out which conversion you meant, and the resulting message is a wall of trait bound text.
 
-Next up: Go doesn't really have enums, just `iota` and a promise you won't misuse it. Rust's `enum` is where I found out what I'd actually been missing.
+Next up: [Go doesn't really have enums, just `iota` and a promise you won't misuse it](/posts/rust-structs-enums-traits/). Rust's `enum` is where I found out what I'd actually been missing.

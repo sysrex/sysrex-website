@@ -1,5 +1,6 @@
 +++
 title = "LLM Quantization, Explained in Plain English"
+description = "What 8-bit and 4-bit quantization change about running a model locally, and how GPTQ, AWQ, and GGUF differ in practice."
 
 [taxonomies]
 tags = ["AI", "Machine Learning"]

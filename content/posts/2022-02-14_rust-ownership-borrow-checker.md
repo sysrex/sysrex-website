@@ -1,5 +1,6 @@
 +++
 title = "Rust Ownership Made Me Feel Like a Junior Dev Again"
+description = "The borrow checker, from Go. Passing a value moves it, a reference borrows it, and you can't mutate something someone else is still reading."
 
 [taxonomies]
 tags = ["Rust", "Go"]
@@ -95,4 +96,4 @@ I'm not going to pretend this all clicked and now I'm enlightened. A few things 
 - **Structs that reference other structs.** The moment you want one struct to hold a reference into another, you're into lifetime annotations (`'a`), and that's a whole separate fight I haven't fully made peace with yet.
 - **The error messages are good, but they assume you already know the vocabulary.** "Cannot borrow as mutable because it is also borrowed as immutable" makes total sense once you know what borrowing means. It reads like Greek the first dozen times.
 
-Next up: what happens when I bring my `if err != nil` muscle memory to `Result<T, E>` — which, unlike ownership, actually felt like coming home.
+Next up: [what happens when I bring my `if err != nil` muscle memory to `Result<T, E>`](/posts/rust-error-handling-result-option/) — which, unlike ownership, actually felt like coming home.

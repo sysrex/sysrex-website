@@ -1,12 +1,13 @@
 +++
 title = "Why Ethereum Execution Clients Are Being Rewritten in Rust"
+description = "An execution client is mostly state I/O. That is the workload people are rewriting in Rust, with Reth as the visible example."
 
 [taxonomies]
 tags = ["Rust", "Ethereum"]
 +++
 
-If you've spent any time around L2 rollups — including the op-stack setup
-covered in an earlier post here — you've run into "execution clients":
+If you've spent any time around L2 rollups — including the [OP Stack
+setup](/posts/create-your-won-rollup-opstack/) from an earlier post — you've run into "execution clients":
 the piece of software responsible for actually running transactions and
 maintaining state. Go has dominated this space for years via Geth. More
 recently, a wave of new clients (Reth being the most visible) have been

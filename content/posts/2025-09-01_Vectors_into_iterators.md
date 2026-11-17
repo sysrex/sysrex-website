@@ -1,42 +1,35 @@
 +++
 title = "Rust Vectors into Iterators"
+description = "into_iter consumes a Vec. collect, with a type annotation, turns the iterator into a Vec or another collection."
 
 [taxonomies]
 tags = ["Rust"]
 +++
 
-Converting a Rust Vector into an Iterator
-
+`into_iter` turns a vector into an iterator by taking ownership of it. After that call the vector can't be used again. `iter` borrows the elements, and `iter_mut` borrows them mutably. This note only shows the consuming form.
 
 <!-- more -->
 
-
-Vectors can also be converted into iterators just like sets. The syntax to converts a vector into an iterator is:
-
 ```rust
 let v_iter = v.into_iter();
-
 ```
-
-
-Example:
 
 ```rust
 fn main() {
-	let v = Vec::from([2,4,8,10]);
+    let v = Vec::from([2, 4, 8, 10]);
+    let v_iter = v.into_iter();
 
-	let v_iter = v.into_iter();
-
-	for item in v_iter {
-		println!("{}", item);
-	}
+    for item in v_iter {
+        println!("{}", item);
+    }
 }
 ```
 
-
-An iterator can be converted back into a vector using the `collect()` method, we need to specify the type of the vector we want to convert it into.
+`collect` builds a collection from an iterator. The type annotation is what decides which one:
 
 ```rust
-let v: Vec<i32> = my_iter.collect(); // turns the iterator into a vector
-let v: HashSet<i32> = my_other_iter.collect(); // turns iter into a set
+use std::collections::HashSet;
+
+let v: Vec<i32> = my_iter.collect();
+let set: HashSet<i32> = my_other_iter.collect();
 ```

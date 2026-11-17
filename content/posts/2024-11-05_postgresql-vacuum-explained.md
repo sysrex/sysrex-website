@@ -1,5 +1,6 @@
 +++
 title = "PostgreSQL VACUUM and Autovacuum, Explained"
+description = "Why Postgres leaves dead tuples behind, what VACUUM and autovacuum clean up, and the query I use when a busy table falls behind."
 
 [taxonomies]
 tags = ["PostgreSQL", "Databases"]

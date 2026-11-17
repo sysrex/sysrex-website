@@ -1,5 +1,6 @@
 +++
 title = "Goroutines Spoiled Me, and Rust Un-Spoiled Me"
+description = "What fearless concurrency costs up front: real OS threads, a runtime when you want something goroutine-shaped, and Send/Sync instead of a race detector."
 
 [taxonomies]
 tags = ["Rust", "Go"]
@@ -73,4 +74,4 @@ thread::spawn(move || {
 
 Not any single feature, honestly. It was the moment I realized the borrow checker fight from four articles ago and the compile error above are the same mechanism doing two different jobs. Go gave me concurrency that's cheap and easy to start and occasionally, quietly, wrong. Rust gave me concurrency that costs more up front — a runtime to choose, a `Send` bound to satisfy, a `Mutex` to reach for instead of a `RefCell` — in exchange for the compiler ruling out an entire category of bug before the code even runs.
 
-I still reach for Go when I want to ship something fast and the stakes are "restart the pod if it falls over." I reach for Rust now when the stakes are higher than that, and I don't want to find out about the race condition from a pager alert. Four articles ago I thought the borrow checker was the whole story. Turns out it was just the first receipt for something I'd end up cashing in every article after.
+I still reach for Go when I want to ship something fast and the stakes are "restart the pod if it falls over." I reach for Rust now when the stakes are higher than that, and I don't want to find out about the race condition from a pager alert. In the [first article](/posts/rust-ownership-borrow-checker/) I thought the borrow checker was the whole story. It was the first receipt for something I cashed in on every article after this one, and again when I built a [toy mempool](/posts/toy-mempool-rust-lessons/).

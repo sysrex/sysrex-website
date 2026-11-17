@@ -1,9 +1,16 @@
 +++
 title = "Create your own L2 rollup testnet with the OP Stack"
+description = "Notes from bringing up an OP Stack rollup on Sepolia in April 2025. The steps have drifted, so this is not a guide to follow as written."
 
 [taxonomies]
-tags = ["tutorial"]
+tags = ["Ethereum", "tutorial"]
 +++
+
+I wrote this in April 2025 against the OP Stack getting-started scripts and `op-deployer` as they stood then, and I have not re-run it. A few of the steps disagree with each other. The L2 chain id is `420` in the env file and `42069` on the op-geth command line. `jwt.txt` is never created, but both clients are told to use it. The binaries are built into `optimism/bin` and then started as `op-node/bin/op-node`, `op-batcher/bin/op-batcher`, and `op-proposer/bin/op-proposer`. The deploy step writes `.deployer/state.json`, while the proposer and the bridge still read `deployments/getting-started/.deploy`. `op-node` is passed `$L1_RPC_KIND`, which the env file never sets. `wallets.sh` is still in the Optimism repo; it now also prints a challenger key that this guide never captures.
+
+I'm leaving the original commands in place until I run them again. Patching one flag on a guide I haven't re-run would only make it look more trustworthy than it is.
+
+<!-- more -->
 
 ## 1. Introduction
 

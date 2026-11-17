@@ -1,5 +1,6 @@
 +++
 title = "I Built a Toy Mempool to Find Out If Any of the Rust Actually Stuck"
+description = "An in-memory Ethereum-shaped mempool, written to see if ownership, Result, enums, and Arc survived more than one thread."
 
 [taxonomies]
 tags = ["Rust", "Go", "Ethereum"]

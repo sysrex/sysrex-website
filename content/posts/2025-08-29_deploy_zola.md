@@ -1,32 +1,33 @@
 +++
 title = "How to deploy zola on github pages"
 date = "2025-08-29"
+description = "How this site is built with Zola 0.23.4 and deployed to GitHub Pages from one Actions workflow."
 
 [taxonomies]
-tags = ["tutorial"]
+tags = ["DevOps", "tutorial"]
 +++
-
 
 ### Intro
 
-This blog is built with Zola (written in Rust), and since it just builds a static page without any database or server-side components, it's a prime candidate for hosting with GitHub Pages.
+This blog is built with Zola (written in Rust), and since it just builds a static page without any database or server-side components, it's a prime candidate for hosting with GitHub Pages. The custom domain is the file `static/CNAME`, which contains `sysrex.com`.
 
-### The official way
+<!-- more -->
 
-The current documentation has a page on how to deploy to GitHub Pages, which works and was the first approach on how this blog is deployed, but is considered "legacy"1. It uses the shalzz/zola-deploy-action action to build the zola site and commit the static files to the gh-pages branch. Once pushed, a built-in GitHub action pages-build-deployment takes the files from that branch and actually deploys the pages. So in the end, the workflow is as follows:
+### The branch approach
 
-- A push to main triggers the shalzz/zola-deploy-action action
-- The shalzz/zola-deploy-action action pushes the static files to the gh-pages branch
+[Zola's GitHub Pages documentation](https://www.getzola.org/documentation/deployment/github-pages/) describes two options. The one this site used first builds the site and commits the static files to a `gh-pages` branch, via [shalzz/zola-deploy-action](https://github.com/shalzz/zola-deploy-action). A push to that branch is what the built-in `pages-build-deployment` workflow then publishes. The sequence is:
+
+- A push to main triggers shalzz/zola-deploy-action
+- That action pushes the static files to the gh-pages branch
 - A push to the gh-pages branch triggers pages-build-deployment, which does the actual deployment
 
+### Publishing the artifact
 
-### The better way
+The workflow in this repository deploys from the action itself, with `upload-pages-artifact` and `deploy-pages`. One workflow builds the site and publishes it. Nothing has to land on a `gh-pages` branch first.
 
-The preffered and recommended way is to deploy directly within the action, using upload-pages-artifact and deploy-pages. We can combine these inside a single workflow, which means we no longer require a push to the gh-pages branch and don't rely on the second action to do the actual deployment from that branch.
+The workflow file is [`.github/workflows/gh-pages.yml`](https://github.com/sysrex/sysrex-website/blob/main/.github/workflows/gh-pages.yml). In the repository settings, go to Settings -> Pages -> Build and deployment and set Source to GitHub Actions.
 
-To make this change, you need to update your github action file (see below), and in your repository on GitHub, go to Settings -> Pages -> Build and deployment -> Change Source to GitHub Actions.
-
-Here is an adjusted workflow:
+Nivis requires Zola 0.23.4 or newer (`min_version` in the theme). The workflow pins that release tarball. `snap install --edge zola` follows the edge channel, which is not what this site builds with.
 
 ```yaml
 
@@ -44,7 +45,9 @@ jobs:
           submodules: 'recursive'
 
       - name: Install zola
-        run: sudo snap install --edge zola
+        run: |
+          curl -sL https://github.com/getzola/zola/releases/download/v0.23.4/zola-v0.23.4-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv zola /usr/local/bin/
 
       - name: Build site
         run: zola build
@@ -78,6 +81,4 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-
-
-This results in a much quicker deployment, and only requires one action to run. If you had used the old approach before, you can now delete the gh-pages branch as well.
+`static/CNAME` is copied into the built site, which is how GitHub Pages picks up the custom domain. If the old `gh-pages` branch is still around from the first setup, it can be deleted once this workflow is the Pages source.

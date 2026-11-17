@@ -1,10 +1,14 @@
 +++
 title = "Variables in Rust"
+description = "A partial excerpt of Amos Wenger's A half-hour to learn Rust, on let, shadowing, and the underscore. The original is the piece to read."
 
 [taxonomies]
 tags = ["Rust"]
 +++
 
+These notes are a partial excerpt of Amos Wenger's [A half-hour to learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust), kept while I was learning `let`. Read the original. I'm leaving this page up so the URL still resolves, until I replace it with a note of my own.
+
+<!-- more -->
 
 ## Variable bindings
 
@@ -33,10 +37,11 @@ x = 42;
 
 
 
+The same binding, with the type on one line:
+
 ```rust
 // there's i8, i16, i32, i64, i128
 //    also u8, u16, u32, u64, u128 for unsigned
-This can also be written as a single line:
 let x: i32 = 42;
 ```
 

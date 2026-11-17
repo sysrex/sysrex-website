@@ -1,5 +1,6 @@
 +++
 title = "Retries, Backoff, and Jitter: Why Naive Retry Logic Makes Outages Worse"
+description = "Why an immediate retry makes an outage worse, and what actually helps: backoff, jitter, a retry budget, and an idempotent operation."
 
 [taxonomies]
 tags = ["Distributed Systems"]
