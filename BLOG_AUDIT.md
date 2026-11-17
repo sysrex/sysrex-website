@@ -1,6 +1,8 @@
 # Blog audit
 
-17 November 2026. Scope is the 16 posts that were already under `content/posts/`, plus a content plan and two drafts. Theme, layout, `config.toml`, and `.github/workflows/gh-pages.yml` were left alone. Nothing was deleted or marked `draft` among the existing posts, so every current URL still builds.
+17 November 2026. Scope is the 16 posts that were already under `content/posts/`, plus a content plan and two drafts. Theme, layout, `config.toml`, and `.github/workflows/gh-pages.yml` were left alone.
+
+On review, Alex removed the Rust series from the site. Seven posts were deleted in this PR. The pages that stay up are Node Exporter, the Zola deploy note, the OP Stack rollup, and the other non-series posts: Postgres VACUUM, retries, LLM quantization, the RED method, LLM evals, and the Ethereum execution-client essay. That last one is an Ethereum post. It is not part of the series, and it stays. Old series URLs will 404. There is no redirect table on this site, and none was added.
 
 The bar used here: Alex writes in public as a builder in AI, crypto, Go, Rust, Linux, and DevOps, and the posts should be practical and technical. The work behind that is DevOps on Celestia's custom chains team, SigmaUno (training and inference, software, Rent, Fleet, and Personale), an org of Grok bots with Rex at the top, a Mac Mini driven through MCP and Recur.build, and Peerline. A post fits when a reader could tell that person wrote it, or when it is a careful explanation of one of those crafts. A post does not fit when it is a copied tutorial, a fragment with no point of view, or a guide that would waste a reader's afternoon.
 
@@ -9,30 +11,46 @@ Verdicts are one of:
 - **Keep.** The body is the kind of post this site should be known for. This PR only adds a description, and a link where one was missing.
 - **Refresh.** Safe edits are in this PR (description, tags, typos, a broken or missing link, a short clarity fix). A larger rewrite is listed and was not done.
 - **Merge.** Not recommended for any current post. The weak pages are not duplicates of the strong ones. Folding them in would either drop a URL or glue two voices together.
-- **Archive later.** Stop presenting the page as Alex's own writing, by replacing the body or unpublishing, in a later change. This PR leaves the URL up.
+- **Remove.** Deleted in this PR after review. The file is gone. Nothing still on the site links to it.
 
 ## Verdicts
 
 | Post | Verdict |
 | --- | --- |
-| Install Node Exporter on Linux Servers | Refresh. Do not merge. Do not archive the URL. |
-| Rust Ownership Made Me Feel Like a Junior Dev Again | Keep |
-| `` `if err != nil` vs `Result<T, E>` `` | Keep |
-| Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over | Keep |
-| Goroutines Spoiled Me, and Rust Un-Spoiled Me | Keep |
+| Install Node Exporter on Linux Servers | Keep, with the refresh already in this PR. Explicitly kept on review. |
+| Rust Ownership Made Me Feel Like a Junior Dev Again | Remove |
+| `` `if err != nil` vs `Result<T, E>` `` | Remove |
+| Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over | Remove |
+| Goroutines Spoiled Me, and Rust Un-Spoiled Me | Remove |
 | PostgreSQL VACUUM and Autovacuum, Explained | Keep |
 | Retries, Backoff, and Jitter | Keep |
 | LLM Quantization, Explained in Plain English | Keep |
-| Create your own L2 rollup testnet with the OP Stack | Refresh. Do not merge. Do not archive. |
-| Why Ethereum Execution Clients Are Being Rewritten in Rust | Keep |
+| Create your own L2 rollup testnet with the OP Stack | Keep, with the staleness warning. Explicitly kept on review. Commands not rewritten. |
+| Why Ethereum Execution Clients Are Being Rewritten in Rust | Keep. Ethereum post, not part of the series. |
 | The RED Method | Keep |
 | What LLM Evals Actually Are | Keep |
-| Variables in Rust | Refresh now. Archive later. Do not merge. |
-| How to deploy zola on github pages | Refresh |
-| Rust Vectors into Iterators | Refresh now. Replace later. Do not merge. |
-| I Built a Toy Mempool to Find Out If Any of the Rust Actually Stuck | Keep |
+| Variables in Rust | Remove |
+| How to deploy zola on github pages | Keep, with the deploy-doc refresh. Explicitly kept on review. |
+| Rust Vectors into Iterators | Remove |
+| I Built a Toy Mempool to Find Out If Any of the Rust Actually Stuck | Remove |
 
-The four Rust-from-Go posts plus the mempool capstone are the center of the site. Postgres, retries, RED, quantization, evals, and the execution-client essay belong next to them. The OP Stack walkthrough, the Zola deploy note, node_exporter, variables, and vectors are the ones that don't currently earn that company.
+What publishes: Node Exporter, Postgres VACUUM, retries, quantization, the OP Stack rollup, the Ethereum execution-client essay, RED, LLM evals, and the Zola deploy note. The two new posts stay `draft = true`.
+
+## Removed on review
+
+Alex asked for the Rust series to come off the site. These files were deleted. The only internal links to them were inside the series itself (each "next up" line, plus the concurrency closer and the mempool pointing at the execution-client post). No kept page linked at a deleted slug. There is no series index. The `Go` tag existed only on the series, so that taxonomy page goes away with the files. The execution-client post still carries `Rust` and `Ethereum`, because that is what the essay is about, not a pointer at the deleted posts.
+
+| Title | File | Slug that will 404 |
+| --- | --- | --- |
+| Rust Ownership Made Me Feel Like a Junior Dev Again | `content/posts/2022-02-14_rust-ownership-borrow-checker.md` | `/posts/rust-ownership-borrow-checker/` |
+| `` `if err != nil` vs `Result<T, E>`: A Love Letter and a Breakup `` | `content/posts/2022-03-14_rust-error-handling-result-option.md` | `/posts/rust-error-handling-result-option/` |
+| Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over | `content/posts/2022-04-11_rust-structs-enums-traits.md` | `/posts/rust-structs-enums-traits/` |
+| Goroutines Spoiled Me, and Rust Un-Spoiled Me | `content/posts/2022-05-09_rust-concurrency-goroutines.md` | `/posts/rust-concurrency-goroutines/` |
+| Variables in Rust | `content/posts/2025-08-28_variables_in_rust.md` | `/posts/variables-in-rust/` |
+| Rust Vectors into Iterators | `content/posts/2025-09-01_Vectors_into_iterators.md` | `/posts/vectors-into-iterators/` |
+| I Built a Toy Mempool to Find Out If Any of the Rust Actually Stuck | `content/posts/2025-09-10_toy-mempool-rust-lessons.md` | `/posts/toy-mempool-rust-lessons/` |
+
+Variables in Rust was a partial excerpt of Amos Wenger's [A half-hour to learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust). Deleting it takes that excerpt off the site. Vectors into Iterators was a short note with no point of view. The four-part Go-to-Rust series and the mempool capstone were the posts the first pass would have kept. Alex's review overrides that: they are off the site.
 
 ## Post by post
 
@@ -47,42 +65,6 @@ Before this PR the body matched the Fosstechnix node_exporter guides, including 
 Changed here: description; tags `Linux`, `DevOps`, `Monitoring`; version pin and the SHA256 from that release's `sha256sums.txt`; the copied frame replaced with a short original intro; explicit tarball name instead of a `/tmp` glob; a `curl` against port 9100; a link to the RED post. The unit, the user, and the systemctl sequence are the same procedure.
 
 Not done: the unit still has no `Restart=` and no systemd sandboxing. Upstream's example unit is the right replacement, and it should be checked on a host, not transcribed into the post from memory. Other architectures are still absent. No merge into the RED post. RED is about service signals. This page is about the host exporter. They should keep linking to each other.
-
-### Rust Ownership Made Me Feel Like a Junior Dev Again
-
-`content/posts/2022-02-14_rust-ownership-borrow-checker.md`.
-
-**Keep.** This is the voice to repeat: first person, a Go programmer hitting a real compiler error, the rule stated once, and an honest list of what still feels bad. It is the Rust/Go positioning with no filler.
-
-Changed here: description, and the "next up" line now links to the `Result` post.
-
-The filename date is February 2022. The series landed in git in 2025, ahead of the September 2025 mempool post, which refers back to "four articles." Leave the dates. They are the reading order.
-
-### `if err != nil` vs `Result<T, E>`: A Love Letter and a Breakup
-
-`content/posts/2022-03-14_rust-error-handling-result-option.md`.
-
-**Keep.** Same series, same standard. `?`, `Option`, and the `unwrap` / `anyhow` / `thiserror` complaints are the kind of specific taste a Rust/Go post should have.
-
-Changed here: description, and the closing line links to the enums post.
-
-### Go Has One Enum-Shaped Hole and Rust Fills It Three Times Over
-
-`content/posts/2022-04-11_rust-structs-enums-traits.md`.
-
-**Keep.** Enums with data, exhaustive `match`, and nominal traits against Go's `iota` and structural interfaces. This is the post the mempool capstone cashes in.
-
-Changed here: description; the "next up" line links to the concurrency post; one sentence fragment ("No `impl` block, no trait, even if...") is now a sentence.
-
-Not done: no rewrite of the orphan-rule or `dyn Trait` sections. They are fine.
-
-### Goroutines Spoiled Me, and Rust Un-Spoiled Me
-
-`content/posts/2022-05-09_rust-concurrency-goroutines.md`.
-
-**Keep.** The point (OS threads versus goroutines, then `Send`/`Sync` as the same ownership rules) is the DevOps-and-Rust overlap, and it is argued with code rather than a slogan.
-
-Changed here: description. The closer said "four articles ago" inside the fourth article. It now points at the first article and forward to the toy mempool.
 
 ### PostgreSQL VACUUM and Autovacuum, Explained
 
@@ -106,7 +88,7 @@ Changed here: description only.
 
 `content/posts/2025-03-12_llm-quantization-explained.md`.
 
-**Keep.** AI, and technically careful: PTQ versus QAT, weight-only versus activations, GGUF / GPTQ / AWQ, and the FP16-versus-4-bit size sketch for a 7B model (about 14GB versus about 4GB) is the right order of magnitude. The voice is a general explainer rather than "here is the model I run." That is weaker positioning than the Rust series, and it is still a post worth having. "Nine times out of ten" is a shrug, not a fake benchmark.
+**Keep.** AI, and technically careful: PTQ versus QAT, weight-only versus activations, GGUF / GPTQ / AWQ, and the FP16-versus-4-bit size sketch for a 7B model (about 14GB versus about 4GB) is the right order of magnitude. The voice is a general explainer rather than "here is the model I run." "Nine times out of ten" is a shrug, not a fake benchmark.
 
 Changed here: description only.
 
@@ -134,13 +116,13 @@ Changed here: description; tag `Ethereum` alongside `tutorial`; a warning above 
 
 Not done: a fresh run against current OP Stack docs, then either replace the steps or cut the page down to the component overview (execution, consensus, batcher, proposer), which is the part that is still worth reading. If the slug is ever cleaned up, keep `/posts/create-your-won-rollup-opstack/` as a Zola alias. Renaming the file in this PR would have changed a live URL.
 
-The intro ("rapidly expanding Ethereum ecosystem") does not sound like the Rust series. Leave it until the re-run. Rewriting the voice on top of broken commands would polish the wrong layer.
+The intro ("rapidly expanding Ethereum ecosystem") is marketing-shaped. Leave it until the re-run. Rewriting the voice on top of broken commands would polish the wrong layer. Alex explicitly kept this post.
 
 ### Why Ethereum Execution Clients Are Being Rewritten in Rust
 
 `content/posts/2025-05-10_ethereum-execution-clients-rust.md`.
 
-**Keep.** Rust plus Ethereum, and it says something: the bottleneck is state I/O, Go's GC and layout show up there, Rust's answer is no GC and control of memory, and the cost is compile times and contributors. Reth and op-geth are named as the concrete case. This is the essay the mempool post points at.
+**Keep.** This is an Ethereum post, not a chapter of the removed series. The bottleneck is state I/O, Go's GC and layout show up there, Rust's answer is no GC and control of memory, and the cost is compile times and contributors. Reth and op-geth are the concrete case. Its tags stay `Rust` and `Ethereum`. The mempool post that used to point here was deleted. This page does not link back at it.
 
 Changed here: description. "the op-stack setup covered in an earlier post" is now a link. The slug contains `won`. That is the live URL, so the link uses it.
 
@@ -162,18 +144,6 @@ Changed here: description only.
 
 Not done: a first-person pass about how a bot routine gets evaluated (a folder of real tasks, what a second model is not allowed to score). That is content-plan item 8. Rewriting this page in order to gesture at it would throw away a clear explainer.
 
-### Variables in Rust
-
-`content/posts/2025-08-28_variables_in_rust.md`. Slug `/posts/variables-in-rust/`.
-
-**Refresh the honesty. Archive the body later. Do not merge.**
-
-The page is a partial excerpt of Amos Wenger's [A half-hour to learn Rust](https://fasterthanli.me/articles/a-half-hour-to-learn-rust), without a source. The `let` / type-annotation / uninitialized-variable / "throwing values away" / shadowing sections follow that article, including the `foobar` example and the sentence about `_` being a lack of name. It does not sound like the Rust series, and the series already teaches the part of this a Go reader needs. Merging it into the ownership post would mean pasting someone else's tutorial into Alex's essay.
-
-Attribution is not a license to keep republishing the excerpt. The later change should replace the body with a short pointer at the original, or take the page down and redirect. This PR does not unpublish it.
-
-Changed here: description that names the source; an attribution paragraph and a link at the top; `<!-- more -->`; the English sentence "This can also be written as a single line:" moved out of the Rust fence, where it made the snippet invalid. The excerpt itself was not rewritten and was not extended.
-
 ### How to deploy zola on github pages
 
 `content/posts/2025-08-29_deploy_zola.md`.
@@ -186,45 +156,32 @@ Changed here: description; tags `DevOps` and `tutorial`; the branch section link
 
 Not done: the sample workflow is still a copy of the real one, and it will drift again. A later edit can say "read the file in the repo" and drop the pasted YAML. Not worth doing until the next time the workflow changes.
 
-### Rust Vectors into Iterators
-
-`content/posts/2025-09-01_Vectors_into_iterators.md`. Slug `/posts/vectors-into-iterators/`.
-
-**Refresh the errors. Replace the page later. Do not merge.**
-
-Three snippets and a grammar error ("the syntax to converts"). No point of view, no mention that `into_iter` consumes the vector, and the `HashSet` example did not import `HashSet`. I could not find this text copied from a specific upstream page; it reads as unfinished notes. The Rust series is the site's Rust writing. This page does not add to it, and it is not a section of any of those posts, so merging has nowhere honest to land. A later iterators post can supersede it. Keep this slug as an alias if the new URL differs.
-
-Changed here: description; grammar; one sentence on `iter` / `iter_mut` versus `into_iter`; the `HashSet` import; `collect` shown with a type annotation, which is what actually selects the collection. The page is still short on purpose. Filling it out into a real post would be the replacement, not a typo fix.
-
-### I Built a Toy Mempool to Find Out If Any of the Rust Actually Stuck
-
-`content/posts/2025-09-10_toy-mempool-rust-lessons.md`.
-
-**Keep.** This is the capstone and the best argument for the series: a toy mempool that uses the enum, the trait, `Result`, and `Arc<Mutex<_>>`, plus the `peek` function Rust refuses to compile and Go would have shipped. The link to the execution-client post was already valid.
-
-Changed here: description only.
-
 ## What this PR changed
 
-Front matter on all 16 posts: every post now has a `description`, which Nivis uses as the list summary and the article abstract. Tags were only widened where they were wrong or empty of the topic (`tutorial` alone on the rollup and the Zola post, `Linux` alone on node_exporter).
+Front matter on every post that is still published: each one has a `description`, which Nivis uses as the list summary and the article abstract. Tags were only widened where they were wrong or empty of the topic (`tutorial` alone on the rollup and the Zola post, `Linux` alone on node_exporter).
 
-Body edits, all small except the node_exporter frame, which had to be replaced because the previous frame was copied:
+Body edits on the posts that stayed:
 
-- Node exporter: v1.12.1, checksum, original intro, port 9100 check.
-- Rust series: next-post links; one fragment; the concurrency closer no longer says "four articles ago" from inside article four, and it links to the mempool.
-- Execution clients: link to the rollup post.
-- Variables: attribution, and the broken code fence.
-- Zola deploy: facts brought in line with the workflow and the Zola docs.
-- OP Stack: a warning. Commands unchanged.
-- Vectors: grammar and the `into_iter` / `collect` clarifications.
+- Node exporter: v1.12.1, checksum, original intro, port 9100 check. Explicitly kept.
+- Execution clients: link to the rollup post. Explicitly kept, including its `Rust` tag.
+- Zola deploy: facts brought in line with the workflow and the Zola docs. Explicitly kept.
+- OP Stack: a warning. Commands unchanged. Explicitly kept.
+- Postgres, retries, quantization, RED, and evals: description only.
+
+Deleted, after review, with no remaining inbound links:
+
+- The four-part Rust-from-Go series (ownership, `Result`, enums and traits, concurrency).
+- The toy mempool capstone.
+- Variables in Rust.
+- Rust Vectors into Iterators.
 
 ## What this PR did not do
 
-- No post was deleted, renamed, or given `draft = true`.
-- No technical rewrite of the Rust series, Postgres, retries, quantization, RED, evals, execution clients, or the mempool.
 - No repair of the OP Stack commands.
+- No technical rewrite of Postgres, retries, quantization, RED, evals, or the execution-client essay.
 - No theme, layout, config, or deploy change.
-- No merge.
+- No redirects for the deleted slugs.
+- No merge. The two new posts are still `draft = true`.
 
 ## Content plan
 
@@ -276,9 +233,7 @@ Open items, copied from the draft:
 
 Not a schedule. The dependencies:
 
-1. Replace the variables excerpt. That is the one with a copyright problem.
-2. Re-run the OP Stack guide, or reduce it to the component overview and keep the warning.
-3. Replace the vectors page when there is a real iterators post.
-4. Harden the node_exporter unit the next time it is actually installed somewhere.
-5. Fill the TODOs above, then take `draft = true` off the two new posts.
-6. Write plan items 3, 6, and 10 from the answers, then 9, then 4 and 5. Item 7 and item 8 can be written from public material whenever.
+1. Re-run the OP Stack guide, or reduce it to the component overview and keep the warning.
+2. Harden the node_exporter unit the next time it is actually installed somewhere.
+3. Fill the TODOs above, then take `draft = true` off the two new posts.
+4. Write plan items 3, 6, and 10 from the answers, then 9, then 4 and 5. Item 7 and item 8 can be written from public material whenever.
