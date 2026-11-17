@@ -1,5 +1,6 @@
 +++
 title = "What LLM Evals Actually Are (and Why 'Looks Good to Me' Isn't a Strategy)"
+description = "How to test LLM output when it will not match a fixture string: a golden set, a rubric, a judge model, and a sampled human look."
 
 [taxonomies]
 tags = ["AI", "Machine Learning"]

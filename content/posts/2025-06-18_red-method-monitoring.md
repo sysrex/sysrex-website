@@ -1,5 +1,6 @@
 +++
 title = "The RED Method: A Simple Starting Point for Monitoring Services"
+description = "Rate, errors, and duration, taken from one Prometheus histogram, as the first dashboard for a request-driven service."
 
 [taxonomies]
 tags = ["DevOps", "Monitoring"]
